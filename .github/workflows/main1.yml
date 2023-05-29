@@ -1,24 +1,38 @@
-name: my_ci
+# ci cd
 
+# This is a basic workflow to help you get started with Actions
+# Global env variables
+name: CI-CD-pipeline-to-AWS-ElasticBeanstalk
+env :
+  EB_PACKAGE_S3_BUCKET_NAME : "elena-aws-git-hub-bucket"
+  EB_APPLICATION_NAME       : "fastApiProject"
+  EB_ENVIRONMENT_NAME       : FastApiProject-env"
+  DEPLOY_PACKAGE_NAME       : "flask_app_${{ github.sha }}.zip"
+  AWS_REGION_NAME           : "us-east-1"
+   
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches:
-      - master
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  my_testing:
+  # This workflow contains a single job called "build"
+  build_my_CI_part:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v1
-    - name: run_script
-      run: echo run my_ci
-      name: run script
-      run: echo @new_actions_to_build
-  my_deploy:
-    runs-on: ubuntu-latest
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Git clone our repo
+        uses: actions/checkout@v3
     
-    steps:
-    - name: print github actions
-      
-      
+      - name: Create ZIP deployment package
+        run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
