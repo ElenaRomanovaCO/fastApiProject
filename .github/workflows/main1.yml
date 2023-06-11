@@ -6,7 +6,7 @@ name: CI-CD-pipeline-to-AWS-ElasticBeanstalk
 env :
   EB_PACKAGE_S3_BUCKET_NAME : "elena-aws-git-hub-bucket"
   EB_APPLICATION_NAME       : "fastApiProject"
-  EB_ENVIRONMENT_NAME       : FastApiProject-env"
+  EB_ENVIRONMENT_NAME       : "FastApiProject-env"
   DEPLOY_PACKAGE_NAME       : "flask_app_${{ github.sha }}.zip"
   AWS_REGION_NAME           : "us-east-1"
    
