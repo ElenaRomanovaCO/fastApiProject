@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd githubActions_flask
+            cd ${{ secrets.TARGET_DIR }}
             ls -la
             pwd
             touch test_cicd_2.txt
