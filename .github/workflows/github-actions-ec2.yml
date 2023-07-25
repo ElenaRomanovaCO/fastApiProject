@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v3
+        
+      - name: check AWS version
+        run: aws --version
 
       - name: Deploy to Server 1
         uses: easingthemes/ssh-deploy@main
