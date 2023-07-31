@@ -35,7 +35,7 @@ jobs:
             pwd
             touch test_cicd_2.txt
             git pull
-            echo ${USER_PASSWORD} | sudo -S systemctl restart gunicorn
+            sudo -S systemctl restart gunicorn | echo ${USER_PASSWORD}
             # systemctl status gunicorn |  sed -n 's/.*Main PID: \(.*\)$/\1/g p' | cut -f1 -d' ' | xargs kill -HUP
                                  
         #sudo apt-get -y update
